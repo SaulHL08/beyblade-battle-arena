@@ -54,10 +54,15 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    console.log('Login attempt:', { email, password }); // LOG
+    
     // Buscar usuario
     const user = await User.findOne({ email });
+    console.log('User found:', user ? 'YES' : 'NO'); // LOG
+    console.log('Email in DB:', user ? user.email : 'N/A'); // LOG
     
     if (!user) {
+      console.log('User not found in database'); // LOG
       return res.status(400).json({ 
         message: 'Credenciales inválidas' 
       });
@@ -65,8 +70,11 @@ router.post('/login', async (req, res) => {
 
     // Verificar password
     const isMatch = await user.matchPassword(password);
+    console.log('Password match:', isMatch); // LOG
+    console.log('Plain password received:', password); // LOG TEMPORAL
     
     if (!isMatch) {
+      console.log('Password does not match'); // LOG
       return res.status(400).json({ 
         message: 'Credenciales inválidas' 
       });
@@ -78,6 +86,8 @@ router.post('/login', async (req, res) => {
       process.env.JWT_SECRET, 
       { expiresIn: '7d' }
     );
+
+    console.log('Login successful for user:', user.email); // LOG
 
     res.json({
       message: 'Login exitoso',
@@ -93,7 +103,7 @@ router.post('/login', async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
+    console.error('Login error:', error); // LOG
     res.status(500).json({ message: 'Error del servidor' });
   }
 });
