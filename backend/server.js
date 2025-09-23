@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -9,9 +10,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Servir archivos estáticos de las imágenes subidas
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/garage', require('./routes/garage'));
+app.use('/api/profile', require('./routes/profile')); // Nueva ruta
 
 // Test route
 app.get('/', (req, res) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { logout } from '../../services/authService';
 import { useAuth } from '../../context/AuthContext';
 
-const Dashboard = ({ onLogout }) => {
+const Dashboard = ({ onLogout, onNavigate }) => {
   const { currentUser } = useAuth();
 
   const handleLogout = () => {
@@ -97,46 +97,46 @@ const Dashboard = ({ onLogout }) => {
         onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
         onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0px)'}
         >
-          <h3 style={{ color: '#ff6b35', marginBottom: '20px' }}>👤 Información de Cuenta</h3>
-          <div style={{ fontSize: '15px', lineHeight: '1.6' }}>
+          <h3 style={{ color: '#ff6b35', marginBottom: '20px' }}>👤 Mi Perfil</h3>
+          <div style={{ fontSize: '15px', lineHeight: '1.6', textAlign: 'center' }}>
             <div style={{ marginBottom: '15px' }}>
-              <div style={{ color: '#6c757d', fontSize: '14px' }}>Email:</div>
-              <strong>{currentUser?.email}</strong>
+              <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👤</div>
+              <strong>{currentUser?.username}</strong>
             </div>
-            <div style={{ marginBottom: '15px' }}>
-              <div style={{ color: '#6c757d', fontSize: '14px' }}>ID:</div>
-              <strong style={{ fontSize: '12px', fontFamily: 'monospace' }}>{currentUser?.id}</strong>
-            </div>
+            
             <button 
-              onClick={handleLogout}
+              onClick={() => onNavigate && onNavigate('profile')}
               style={{
                 width: '100%',
                 padding: '12px 20px',
-                backgroundColor: '#dc3545',
+                backgroundColor: '#6f42c1',
                 color: 'white',
                 border: 'none',
                 borderRadius: '10px',
                 cursor: 'pointer',
                 fontSize: '16px',
                 fontWeight: 'bold',
+                marginBottom: '10px',
                 transition: 'all 0.3s',
-                boxShadow: '0 3px 10px rgba(220, 53, 69, 0.3)'
+                boxShadow: '0 3px 10px rgba(111, 66, 193, 0.3)'
               }}
               onMouseOver={(e) => {
-                e.target.style.backgroundColor = '#c82333';
+                e.target.style.backgroundColor = '#5a2d91';
                 e.target.style.transform = 'translateY(-2px)';
               }}
               onMouseOut={(e) => {
-                e.target.style.backgroundColor = '#dc3545';
+                e.target.style.backgroundColor = '#6f42c1';
                 e.target.style.transform = 'translateY(0px)';
               }}
             >
-              Cerrar Sesión
+              Ver Mi Perfil
             </button>
+            <div style={{ fontSize: '14px', color: '#6c757d' }}>
+              Personaliza tu perfil y biografía
+            </div>
           </div>
         </div>
 
-        {/* Tarjeta adicional para llenar el espacio */}
         <div style={{ 
           background: 'rgba(255, 255, 255, 0.95)', 
           padding: '25px', 
@@ -153,6 +153,7 @@ const Dashboard = ({ onLogout }) => {
           <h3 style={{ color: '#ff6b35', marginBottom: '20px' }}>🎮 Inicio Rápido</h3>
           <div>
             <button 
+              onClick={() => onNavigate && onNavigate('garage')}
               style={{
                 width: '100%',
                 padding: '12px 20px',
@@ -247,6 +248,60 @@ const Dashboard = ({ onLogout }) => {
             <div style={{ fontSize: '14px', color: '#6c757d', textAlign: 'center' }}>
               ¡250 XP más para el bonus diario!
             </div>
+          </div>
+        </div>
+
+        <div style={{ 
+          background: 'rgba(255, 255, 255, 0.95)', 
+          padding: '25px', 
+          borderRadius: '15px', 
+          border: '2px solid rgba(255, 107, 53, 0.3)',
+          color: '#333',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+          transition: 'transform 0.3s'
+        }}
+        onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+        onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0px)'}
+        >
+          <h3 style={{ color: '#ff6b35', marginBottom: '20px' }}>🔧 Gestión de Cuenta</h3>
+          <div>
+            <div style={{ fontSize: '15px', lineHeight: '1.6', marginBottom: '20px' }}>
+              <div style={{ marginBottom: '10px' }}>
+                <div style={{ color: '#6c757d', fontSize: '14px' }}>Email:</div>
+                <strong>{currentUser?.email}</strong>
+              </div>
+              <div style={{ marginBottom: '10px' }}>
+                <div style={{ color: '#6c757d', fontSize: '14px' }}>ID:</div>
+                <strong style={{ fontSize: '12px', fontFamily: 'monospace' }}>{currentUser?.id}</strong>
+              </div>
+            </div>
+            
+            <button 
+              onClick={handleLogout}
+              style={{
+                width: '100%',
+                padding: '12px 20px',
+                backgroundColor: '#dc3545',
+                color: 'white',
+                border: 'none',
+                borderRadius: '10px',
+                cursor: 'pointer',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                transition: 'all 0.3s',
+                boxShadow: '0 3px 10px rgba(220, 53, 69, 0.3)'
+              }}
+              onMouseOver={(e) => {
+                e.target.style.backgroundColor = '#c82333';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.backgroundColor = '#dc3545';
+                e.target.style.transform = 'translateY(0px)';
+              }}
+            >
+              Cerrar Sesión
+            </button>
           </div>
         </div>
       </div>
