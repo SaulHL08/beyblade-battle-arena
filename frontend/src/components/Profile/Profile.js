@@ -343,7 +343,7 @@ const Profile = () => {
         {/* Avatar del usuario */}
         <div style={{
           position: 'absolute',
-          bottom: '-50px',
+          bottom: '100px', // Cambiado de -50px a 100px para subirlo más
           left: '50px',
           width: '120px',
           height: '120px',
@@ -355,7 +355,8 @@ const Profile = () => {
           cursor: uploadingImage.profile ? 'not-allowed' : 'pointer',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          zIndex: 10 // Agregado para que esté por encima de otros elementos
         }}
         onClick={() => !uploadingImage.profile && profileImageRef.current?.click()}
         >
@@ -365,19 +366,22 @@ const Profile = () => {
               src={imagePreview.profile || getImageUrl(user.profileImage)} 
               alt="Foto de perfil"
               style={{
-                width: '110px',
-                height: '110px',
+                width: '100%',
+                height: '100%',
                 borderRadius: '50%',
                 objectFit: 'cover',
-                objectPosition: 'center',
+                objectPosition: 'center center',
                 opacity: uploadingImage.profile ? 0.7 : 1,
                 transition: 'opacity 0.3s'
               }}
               onError={(e) => {
-                console.log('Error cargando imagen de perfil');
+                console.log('Error cargando imagen de perfil:', e);
                 e.target.style.display = 'none';
               }}
-              onLoad={() => console.log('Imagen de perfil cargada correctamente')}
+              onLoad={(e) => {
+                console.log('Imagen de perfil cargada correctamente');
+                console.log('URL de la imagen:', e.target.src);
+              }}
             />
           )}
           
@@ -454,7 +458,7 @@ const Profile = () => {
         {/* Información básica del usuario */}
         <div style={{
           position: 'absolute',
-          bottom: '20px',
+          bottom: '130px', // Cambiado de 20px a 130px para subirlo a la altura de la foto
           left: '200px',
           color: 'white'
         }}>
@@ -462,7 +466,7 @@ const Profile = () => {
             {user.username}
           </h1>
           <p style={{ margin: '0', fontSize: '16px', opacity: 0.9, textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
-            Nivel {user.level} • Miembro desde hace {user.memberSince} días
+            Nivel {user.level}
           </p>
         </div>
 

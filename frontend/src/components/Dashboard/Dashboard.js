@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { logout } from '../../services/authService';
 import { useAuth } from '../../context/AuthContext';
+import { getProfile } from '../../services/profileService';
 
 const Dashboard = ({ onLogout, onNavigate }) => {
   const { currentUser } = useAuth();
+  const [profileData, setProfileData] = useState(null);
+
+  useEffect(() => {
+    loadProfile();
+  }, []);
+
+  const loadProfile = async () => {
+    try {
+      const data = await getProfile();
+      setProfileData(data);
+    } catch (error) {
+      console.error('Error cargando perfil en dashboard:', error);
+    }
+  };
 
   const handleLogout = () => {
     logout();
     onLogout();
+  };
+
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return null;
+    return `${window.location.origin}/${imagePath}`;
   };
 
   return (
@@ -100,7 +120,47 @@ const Dashboard = ({ onLogout, onNavigate }) => {
           <h3 style={{ color: '#ff6b35', marginBottom: '20px' }}>👤 Mi Perfil</h3>
           <div style={{ fontSize: '15px', lineHeight: '1.6', textAlign: 'center' }}>
             <div style={{ marginBottom: '15px' }}>
-              <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👤</div>
+              {/* Avatar del usuario */}
+              <div style={{
+                width: '80px',
+                height: '80px',
+                borderRadius: '50%',
+                margin: '0 auto 10px',
+                overflow: 'hidden',
+                background: !(profileData?.user?.profileImage) ? 'linear-gradient(45deg, #ff6b35, #f7931e)' : 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '3px solid #ff6b35',
+                boxShadow: '0 5px 15px rgba(255, 107, 53, 0.3)'
+              }}>
+                {profileData?.user?.profileImage ? (
+                  <img 
+                    src={getImageUrl(profileData.user.profileImage)} 
+                    alt="Foto de perfil"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center center'
+                    }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                ) : null}
+                <div style={{
+                  display: profileData?.user?.profileImage ? 'none' : 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: '100%',
+                  fontSize: '2rem',
+                  color: 'white'
+                }}>
+                  👤
+                </div>
+              </div>
               <strong>{currentUser?.username}</strong>
             </div>
             
