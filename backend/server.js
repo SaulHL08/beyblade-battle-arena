@@ -16,7 +16,10 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/garage', require('./routes/garage'));
-app.use('/api/profile', require('./routes/profile')); // Nueva ruta
+app.use('/api/profile', require('./routes/profile'));
+app.use('/api/tournaments', require('./routes/tournaments'));
+app.use('/api/inventory', require('./routes/inventory'));
+app.use('/api/wishlist', require('./routes/wishlist')); // ← NUEVA LÍNEA
 
 // Test route
 app.get('/', (req, res) => {

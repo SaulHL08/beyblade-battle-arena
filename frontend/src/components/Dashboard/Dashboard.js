@@ -83,6 +83,7 @@ const Dashboard = ({ onLogout, onNavigate }) => {
           </div>
         </div>
 
+        {/* SECCIÓN ACTUALIZADA: Funciones Disponibles */}
         <div style={{ 
           background: 'rgba(255, 255, 255, 0.95)', 
           padding: '25px', 
@@ -96,12 +97,48 @@ const Dashboard = ({ onLogout, onNavigate }) => {
         onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
         onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0px)'}
         >
-          <h3 style={{ color: '#ff6b35', marginBottom: '20px' }}>⚡ Próximas Funciones</h3>
+          <h3 style={{ color: '#ff6b35', marginBottom: '20px' }}>⚡ Funciones</h3>
           <div style={{ textAlign: 'left', fontSize: '15px' }}>
-            <div style={{ padding: '8px 0', borderBottom: '1px solid #e9ecef' }}>🏆 Sistema de Torneos</div>
-            <div style={{ padding: '8px 0', borderBottom: '1px solid #e9ecef' }}>⚔️ Arena de Batalla</div>
-            <div style={{ padding: '8px 0', borderBottom: '1px solid #e9ecef' }}>📈 Rankings Globales</div>
-            <div style={{ padding: '8px 0' }}>🎯 Misiones Diarias</div>
+            {/* Sistema de Torneos - AHORA DISPONIBLE */}
+            <div 
+              style={{ 
+                padding: '12px', 
+                borderBottom: '1px solid #e9ecef',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                borderRadius: '8px',
+                marginBottom: '10px',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                color: 'white',
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+              onClick={() => onNavigate && onNavigate('tournaments')}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateX(5px)';
+                e.currentTarget.style.boxShadow = '0 5px 15px rgba(102, 126, 234, 0.4)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateX(0px)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <span>🏆 Sistema de Torneos</span>
+              <span style={{ fontSize: '12px', background: 'rgba(255,255,255,0.3)', padding: '2px 8px', borderRadius: '10px' }}>NUEVO</span>
+            </div>
+
+            {/* Próximamente */}
+            <div style={{ padding: '8px 0', borderBottom: '1px solid #e9ecef', opacity: 0.5 }}>
+              ⚔️ Arena de Batalla
+            </div>
+            <div style={{ padding: '8px 0', borderBottom: '1px solid #e9ecef', opacity: 0.5 }}>
+              📈 Rankings Globales
+            </div>
+            <div style={{ padding: '8px 0', opacity: 0.5 }}>
+              🎯 Misiones Diarias
+            </div>
           </div>
         </div>
 
@@ -197,6 +234,7 @@ const Dashboard = ({ onLogout, onNavigate }) => {
           </div>
         </div>
 
+        {/* SECCIÓN ACTUALIZADA: Inicio Rápido con botón de Torneos */}
         <div style={{ 
           background: 'rgba(255, 255, 255, 0.95)', 
           padding: '25px', 
@@ -237,10 +275,54 @@ const Dashboard = ({ onLogout, onNavigate }) => {
                 e.target.style.transform = 'translateY(0px)';
               }}
             >
-              Ir al Garage
+              ⚙️ Ir al Garage
             </button>
+            
+            {/* NUEVO BOTÓN: Torneos */}
+            <button 
+              onClick={() => onNavigate && onNavigate('tournaments')}
+              style={{
+                width: '100%',
+                padding: '12px 20px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '10px',
+                cursor: 'pointer',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                marginBottom: '10px',
+                transition: 'all 0.3s',
+                boxShadow: '0 3px 10px rgba(102, 126, 234, 0.3)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+              onMouseOver={(e) => {
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow = '0 5px 15px rgba(102, 126, 234, 0.4)';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.transform = 'translateY(0px)';
+                e.target.style.boxShadow = '0 3px 10px rgba(102, 126, 234, 0.3)';
+              }}
+            >
+              🏆 Ver Torneos
+              <span style={{
+                position: 'absolute',
+                top: '5px',
+                right: '10px',
+                background: 'rgba(255, 255, 255, 0.3)',
+                padding: '2px 6px',
+                borderRadius: '8px',
+                fontSize: '10px',
+                fontWeight: 'bold'
+              }}>
+                NUEVO
+              </span>
+            </button>
+
             <div style={{ fontSize: '14px', color: '#6c757d', marginTop: '10px' }}>
-              Crea y personaliza tus Beyblades
+              Crea tus Beyblades y únete a torneos
             </div>
           </div>
         </div>

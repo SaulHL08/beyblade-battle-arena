@@ -83,19 +83,34 @@ router.delete('/:id', auth, async (req, res) => {
 router.get('/components', (req, res) => {
   res.json({
     blades: [
+      // Originales
       { name: 'DranSword', image: 'BladeDranSword.png', attack: 90, defense: 60 },
       { name: 'DranDagger', image: 'BladeDranDagger.png', attack: 75, defense: 80 },
-      { name: 'DranBuster', image: 'BladeDranBuster.png', attack: 85, defense: 95 }
+      { name: 'DranBuster', image: 'BladeDranBuster.png', attack: 85, defense: 95 },
+      // Nuevas
+      { name: 'KnightShield', image: 'BladeKnightShield.png', attack: 70, defense: 98 },
+      { name: 'WizardArrow', image: 'BladeWizardArrow.png', attack: 95, defense: 55 },
+      { name: 'HellsScythe', image: 'BladeHellsScythe.png', attack: 88, defense: 72 }
     ],
     ratchets: [
+      // Originales
       { name: '3-60', image: 'Ratchet3-60.png' },
       { name: '4-60', image: 'Ratchet4-60.png' },
-      { name: '1-60', image: 'Ratchet1-60.png' }
+      { name: '1-60', image: 'Ratchet1-60.png' },
+      // Nuevas
+      { name: '3-80', image: 'Ratchet3-80.png' },
+      { name: '4-80', image: 'Ratchet4-80.png' },
+      { name: '4-60R', image: 'Ratchet4-60R.png' }
     ],
     bits: [
+      // Originales
       { name: 'Flat', image: 'BitFlat.png', stamina: 60 },
       { name: 'Rush', image: 'BitRush.png', stamina: 85 },
-      { name: 'Accel', image: 'BitAccel.png', stamina: 70 }
+      { name: 'Accel', image: 'BitAccel.png', stamina: 70 },
+      // Nuevas
+      { name: 'Needle', image: 'BitNeedle.png', stamina: 95 },
+      { name: 'Ball', image: 'BitBall.png', stamina: 80 },
+      { name: 'Taper', image: 'BitTaper.png', stamina: 65 }
     ]
   });
 });

@@ -5,6 +5,7 @@ import Register from './components/Auth/Register';
 import Dashboard from './components/Dashboard/Dashboard';
 import Garage from './components/Garage/Garage';
 import Profile from './components/Profile/Profile';
+import Tournaments from './components/Tournaments/Tournaments'; // ← NUEVO IMPORT
 import './App.css';
 
 function AppContent() {
@@ -90,6 +91,35 @@ function AppContent() {
               ⚙️ Mi Garage
             </button>
 
+            {/* ↓↓↓ NUEVO BOTÓN DE TORNEOS ↓↓↓ */}
+            <button 
+              onClick={() => setCurrentPage('tournaments')}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: currentPage === 'tournaments' ? '#ff6b35' : 'transparent',
+                color: 'white',
+                border: '2px solid #ff6b35',
+                borderRadius: '25px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                transition: 'all 0.3s',
+                boxShadow: currentPage === 'tournaments' ? '0 5px 15px rgba(255, 107, 53, 0.3)' : 'none'
+              }}
+              onMouseOver={(e) => {
+                if (currentPage !== 'tournaments') {
+                  e.target.style.backgroundColor = 'rgba(255, 107, 53, 0.2)';
+                }
+              }}
+              onMouseOut={(e) => {
+                if (currentPage !== 'tournaments') {
+                  e.target.style.backgroundColor = 'transparent';
+                }
+              }}
+            >
+              🏆 Torneos
+            </button>
+            {/* ↑↑↑ FIN NUEVO BOTÓN ↑↑↑ */}
+
             <button 
               onClick={() => setCurrentPage('profile')}
               style={{
@@ -160,6 +190,7 @@ function AppContent() {
         <div style={{ minHeight: 'calc(100vh - 70px)' }}>
           {currentPage === 'dashboard' && <Dashboard onLogout={handleLogout} onNavigate={setCurrentPage} />}
           {currentPage === 'garage' && <Garage />}
+          {currentPage === 'tournaments' && <Tournaments />} {/* ← NUEVA LÍNEA */}
           {currentPage === 'profile' && <Profile />}
         </div>
       </div>

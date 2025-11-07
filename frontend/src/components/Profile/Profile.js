@@ -145,13 +145,18 @@ const Profile = () => {
   };
 
   const getBeybladeImage = (bladeName) => {
-    const bladeImages = {
-      'DranSword': 'BladeDranSword.png',
-      'DranDagger': 'BladeDranDagger.png',
-      'DranBuster': 'BladeDranBuster.png'
-    };
-    return `/images/${bladeImages[bladeName] || 'BladeDranSword.png'}`;
+  const bladeImages = {
+    // Blades originales
+    'DranSword': 'BladeDranSword.png',
+    'DranDagger': 'BladeDranDagger.png',
+    'DranBuster': 'BladeDranBuster.png',
+    // Blades nuevas
+    'KnightShield': 'BladeKnightShield.png',
+    'WizardArrow': 'BladeWizardArrow.png',
+    'HellsScythe': 'BladeHellsScythe.png'
   };
+  return `/images/${bladeImages[bladeName] || 'BladeDranSword.png'}`;
+};
 
   if (loading) {
     return (
